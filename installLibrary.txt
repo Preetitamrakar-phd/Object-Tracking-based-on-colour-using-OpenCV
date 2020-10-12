@@ -1,0 +1,45 @@
+pip install pyautogui 
+this helps to control the mouse pointer, keyboards keys, right click, left clicks, scroll etc
+
+Object tracking
+Used for vehicle navigation,surveillance system
+
+HSV
+Hue, Saturation, Value
+Different from BGR format
+Based on hsv value, we are going to identify the color and then track that color.
+
+BGR to HSV 
+From camera, we read the BGR image or frame
+#dst = cv2.cvtColor(src,cv2.COLOR_BGR2HSV)
+
+Minimum enclosing circle
+we can able to get its parameter such as  x,y and radius.
+#((x,y),radius) = cv2.minEnclosingCircle(countourArea)
+
+Moments to fine center of the area
+Moment: help you to calculate some features like center of mass of the object, area of the object etc.
+
+#var = cv2.moments(contourArea)
+center is Cx and Cy
+center = (int(M["m10"]/M["m00"]),int(M["m01"]/M["m00"]))
+Cx=m10/m00		Cy=m01/m00
+
+Drawing circle
+cv2.cirlce(src,(x,y),int(radius), color, thickness) 
+
+To draw a dot, radius is static like 5
+cv2.circle(frame, center, 5, (0,0,255), -1 )
+
+Workflow of color object tracking
+1. read frame from camera
+2. pre-processing image (bgr to hsv, smoothening, dilation stc)
+3. finding contours
+4. draw minimum enclosing circle
+5. finding center of contour area
+6. draw circle and center
+7. direction based on radius & position (used for tracking, left, right front or back)
+
+Tuning color
+red color hsv value low and high (google it)
+
